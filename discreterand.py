@@ -81,9 +81,12 @@ class App(tk.Frame):
 
     def showCalculations(self, title, x_label="Values", y_label="Probabilities", x_values=[], y_values=[]):
         mean, varx, stdev = self.getCalculations(x_values, y_values)
+        x_label, y_label = x_label.strip(" ") or "Values", y_label.strip(" ") or "Probabilities"
         meanCalc = "E(X) = " + " + ".join([f"{v} × {p}" for v, p in zip(x_values, y_values)]) + f" = {round(mean, 4)}"
         varxCalc = "Var(X) = " + " + ".join([f"({v-mean})^2 × {p}" for v, p in zip(x_values, y_values)]) + f" = {round(varx, 4)}"
         stdevCalc = f"σ_X = √{round(varx, 4)} = {round(stdev, 4)}"
+        print("Axes:")
+        print(x_label, y_label)
 
         try:
             self.dataFrame.pack_forget()
